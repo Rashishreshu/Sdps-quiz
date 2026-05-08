@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SDPS AI Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            color: var(--text-main);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        #user-display {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .section-box {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .options {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .options label:hover {
+            background: #f9fafb;
+            border-color: var(--primary);
+        }
+
+        .options input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .options label.selected {
+            border-color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .options label.correct-choice {
+            border-color: var(--success);
+            background-color: #ecfdf5;
+        }
+
+        .options label.wrong-choice {
+            border-color: var(--danger);
+            background-color: #fef2f2;
+        }
+
+        .instant-feedback {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .feedback-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-prev {
+            background: #e5e7eb;
+            color: var(--text-main);
+            flex: 1;
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: white;
+            flex: 2;
+        }
+
+        .btn-submit {
+            background: var(--success);
+            color: white;
+            width: 100%;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .score-box {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-top: 20px;
+            display: none;
+            box-shadow: var(--shadow);
+        }
+
+        .review-item {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+
+        .review-q {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-success {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .text-danger {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .correct-badge {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .section-box {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1 id="school-title">SDPS AI Portal</h1>
+        <span id="user-display">Welcome, Student</span>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Content loaded from JSON -->
+        </div>
+
+        <div id="controls">
+            <button id="submit-btn" class="btn-submit" onclick="calculateScore()" style="display: none;">Finish & Submit
+                Quiz</button>
+        </div>
+
+        <div id="result" class="score-box"></div>
+    </div>
+
+    <script>
+        const currentUser = localStorage.getItem('sdpsUser') || "Guest Student";
+        document.getElementById('user-display').innerText = "Student: " + currentUser;
+
+        let questions = [];
+        let currentIndex = 0;
+        let userAnswers = [];
+
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                document.title = data.quizTitle;
+                document.getElementById('school-title').innerText = data.schoolName;
+
+                data.sections.forEach(section => {
+                    section.questions.forEach(q => {
+                        questions.push(q);
+                    });
+                });
+
+                userAnswers = new Array(questions.length).fill(null);
+                showQuestion();
+            })
+            .catch(err => console.error("Data error:", err));
+
+        function showQuestion() {
+            const container = document.getElementById('quiz-container');
+            const q = questions[currentIndex];
+            const isAnswered = userAnswers[currentIndex] !== null;
+
+            const progress = ((currentIndex + 1) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+
+            container.innerHTML = `
+        <div class="section-box">
+            <h2>Question ${currentIndex + 1} of ${questions.length}</h2>
+            <div class="question">${q.q}</div>
+
+            <div class="options">
+                ${q.options.map((opt, i) => {
+                let stateClass = "";
+                if (isAnswered) {
+                    if (i === q.answer) stateClass = "correct-choice";
+                    else if (i === userAnswers[currentIndex]) stateClass = "wrong-choice";
+                } else if (userAnswers[currentIndex] === i) {
+                    stateClass = "selected";
+                }
+
+                return `
+                        <label class="${stateClass}">
+                            <input type="radio" name="option" value="${i}" 
+                            ${userAnswers[currentIndex] === i ? 'checked' : ''} 
+                            ${isAnswered ? 'disabled' : ''}
+                            onclick="saveAndReveal(${i})">
+                            ${opt}
+                        </label>
+                    `;
+            }).join('')}
+            </div>
+
+            <div id="instant-feedback" class="instant-feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevQuestion()" ${currentIndex === 0 ? 'disabled' : ''}>Back</button>
+                <button class="btn-next" onclick="nextQuestion()" id="next-btn" ${!isAnswered ? 'disabled' : ''}>
+                    ${currentIndex === questions.length - 1 ? 'Review All' : 'Continue'}
+                </button>
+            </div>
+        </div>
+    `;
+
+            if (isAnswered) {
+                revealFeedback(userAnswers[currentIndex], q.answer);
+            }
+        }
+
+        function saveAndReveal(val) {
+            userAnswers[currentIndex] = val;
+            const q = questions[currentIndex];
+
+            // Disable other inputs and show feedback immediately
+            revealFeedback(val, q.answer);
+            showQuestion(); // Re-render to apply classes
+
+            if (currentIndex === questions.length - 1) {
+                document.getElementById('submit-btn').style.display = 'block';
+            }
+        }
+
+        function revealFeedback(userPick, correctPick) {
+            const feedback = document.getElementById('instant-feedback');
+            if (!feedback) return;
+
+            feedback.style.display = 'block';
+            if (userPick === correctPick) {
+                feedback.innerText = "Correct! Well done.";
+                feedback.className = "instant-feedback feedback-success";
+            } else {
+                feedback.innerText = `Incorrect. The correct answer is: ${questions[currentIndex].options[correctPick]}`;
+                feedback.className = "instant-feedback feedback-error";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                showQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showQuestion();
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            let reviewHTML = `<div style="margin-top: 2rem; border-top: 2px solid #e5e7eb; padding-top: 1rem;">
+                        <h3 style="text-align: center;">Final Performance Report</h3>`;
+
+            questions.forEach((q, i) => {
+                const isCorrect = userAnswers[i] === q.answer;
+                if (isCorrect) score++;
+
+                const userAnswerText = userAnswers[i] !== null ? q.options[userAnswers[i]] : "No answer provided";
+                const correctAnswerText = q.options[q.answer];
+
+                reviewHTML += `
+            <div class="review-item">
+                <div class="review-q">${i + 1}. ${q.q}</div>
+                <div class="review-ans">
+                    Your Answer: <span class="${isCorrect ? 'text-success' : 'text-danger'}">${userAnswerText}</span>
+                    ${!isCorrect ? `<br>Correct Answer: <span class="text-success">${correctAnswerText}</span>` : ' <span class="correct-badge">Correct</span>'}
+                </div>
+            </div>
+        `;
+            });
+
+            reviewHTML += `</div>`;
+
+            const resDiv = document.getElementById('result');
+            const quizDiv = document.getElementById('quiz-container');
+            const progDiv = document.querySelector('.progress-container');
+
+            quizDiv.style.display = 'none';
+            progDiv.style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'none';
+
+            resDiv.style.display = 'block';
+            resDiv.innerHTML = `
+        <div style="text-align:center">
+            <div style="font-size: 3rem;">🎯</div>
+            <h3>Quiz Completed!</h3>
+            <p style="font-size: 1.5rem; margin-bottom: 1rem;">Final Score: ${score} / ${questions.length}</p>
+            <button onclick="location.reload()" style="background: var(--primary); color: white; margin-bottom: 2rem;">Retake Quiz</button>
+        </div>
+        ${reviewHTML}
+    `;
+        }
+    </script>
+</body>
+
+</html>
