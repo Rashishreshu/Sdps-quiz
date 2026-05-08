@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SDPS AI Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg-gradient); 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+        }
+
+        /* Responsive Logic */
+        .login-card { 
+            background: var(--glass); 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); 
+            width: 100%;
+            max-width: 400px; /* Laptop/Desktop */
+            text-align: center; 
+            backdrop-filter: blur(10px);
+        }
+
+        /* Adapt for larger screens (TV/Large Monitors) */
+        @media (min-width: 1500px) {
+            .login-card { max-width: 500px; padding: 4rem; }
+            h2 { font-size: 2.5rem; }
+            input, button { font-size: 1.2rem; }
+        }
+
+        /* Adapt for smaller screens (Mobile) */
+        @media (max-width: 480px) {
+            .login-card { padding: 1.5rem; border-radius: 15px; }
+            h2 { font-size: 1.5rem; }
+        }
+
+        h2 { 
+            color: #1f2937; 
+            margin-bottom: 0.5rem; 
+            font-weight: 700;
+        }
+
+        p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+            margin-left: 4px;
+        }
+
+        input { 
+            width: 100%; 
+            padding: 14px 16px; 
+            border: 2px solid #e5e7eb; 
+            border-radius: 12px; 
+            font-size: 1rem;
+            outline: none;
+            background: #f9fafb;
+        }
+
+        input:focus { 
+            border-color: var(--primary); 
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: 600;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
+        }
+
+        button:hover { 
+            background: var(--primary-hover); 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.5);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .footer-text {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>SDPS AI Portal</h2>
+        <p>Enter your details to start the quiz</p>
+        
+        <div class="input-group">
+            <label>FULL NAME</label>
+            <input type="text" id="username" placeholder="e.g. John Doe" autocomplete="off">
+        </div>
+
+        <div class="input-group" style="margin-bottom: 1rem;">
+            <label>ACCESS CODE</label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div>
+
+        <button onclick="login()">Enter Dashboard</button>
+
+        <div class="footer-text">
+            &copy; 2026 SDPS Education Board • AI Knowledge Assessment
+        </div>
+    </div>
+
+    <script>
+        // Allow "Enter" key to trigger login
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+
+        function login() {
+            const user = document.getElementById('username').value.trim();
+            if(user.length >= 3) {
+                // Smooth transition effect
+                document.querySelector('.login-card').style.opacity = '0';
+                document.querySelector('.login-card').style.transform = 'scale(0.9)';
+                
+                setTimeout(() => {
+                    localStorage.setItem('sdpsUser', user);
+                    window.location.href = 'index.html';
+                }, 300);
+            } else { 
+                alert("Please enter a valid name (at least 3 characters)"); 
+            }
+        }
+    </script>
+</body>
+</html>
