@@ -30,26 +30,23 @@
             padding: 20px;
         }
 
-        /* Responsive Logic */
         .login-card { 
             background: var(--glass); 
             padding: 2.5rem; 
             border-radius: 20px; 
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); 
             width: 100%;
-            max-width: 400px; /* Laptop/Desktop */
+            max-width: 400px;
             text-align: center; 
             backdrop-filter: blur(10px);
         }
 
-        /* Adapt for larger screens (TV/Large Monitors) */
         @media (min-width: 1500px) {
             .login-card { max-width: 500px; padding: 4rem; }
             h2 { font-size: 2.5rem; }
             input, button { font-size: 1.2rem; }
         }
 
-        /* Adapt for smaller screens (Mobile) */
         @media (max-width: 480px) {
             .login-card { padding: 1.5rem; border-radius: 15px; }
             h2 { font-size: 1.5rem; }
@@ -150,8 +147,8 @@
     </div>
 
     <script>
-        // Allow "Enter" key to trigger login
-        document.addEventListener('keypress', function (e) {
+        // Enter key support (improved)
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
                 login();
             }
@@ -159,18 +156,48 @@
 
         function login() {
             const user = document.getElementById('username').value.trim();
-            if(user.length >= 3) {
-                // Smooth transition effect
-                document.querySelector('.login-card').style.opacity = '0';
-                document.querySelector('.login-card').style.transform = 'scale(0.9)';
-                
-                setTimeout(() => {
-                    localStorage.setItem('sdpsUser', user);
-                    window.location.href = 'index.html';
-                }, 300);
-            } else { 
-                alert("Please enter a valid name (at least 3 characters)"); 
+            const pass = document.getElementById('password').value.trim();
+
+            // Basic validation
+            if(user.length < 3) {
+                alert("Please enter a valid name (at least 3 characters)");
+                return;
             }
+
+            // (Optional) simple access code check
+            if(pass.length === 0) {
+                alert("Please enter access code");
+                return;
+            }
+
+            console.log("Logging in:", user);
+
+            // Animation
+            const card = document.querySelector('.login-card');
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.9)';
+
+            // Save user
+            localStorage.setItem('sdpsUser', user);
+
+            // Smart redirect (handles .htm / .html automatically)
+            setTimeout(() => {
+                let target = "index.html";
+
+                // fallback if .html doesn't exist
+                fetch(target)
+                    .then(res => {
+                        if(res.ok) {
+                            window.location.href = target;
+                        } else {
+                            window.location.href = "index.htm";
+                        }
+                    })
+                    .catch(() => {
+                        window.location.href = "index.htm";
+                    });
+
+            }, 300);
         }
     </script>
 </body>
