@@ -1,0 +1,73 @@
+{
+  "schoolName": "SDPS",
+  "quizTitle": "AI Knowledge Portal",
+  "sections": [
+    {
+      "sectionTitle": "Section 1: AI Basics & History",
+      "questions": [
+        {"q": "What does the acronym 'AI' stand for?", "options": ["Advanced Internet", "Artificial Intelligence", "Automated Information", "Android Integration"], "answer": 1},
+        {"q": "AI systems learn from large amounts of ________.", "options": ["Paper", "Electricity", "Data", "Batteries"], "answer": 2},
+        {"q": "What is 'Machine Learning'?", "options": ["A machine building machines", "Computers learning from experience", "A computer going to school", "Restarting a computer"], "answer": 1},
+        {"q": "What is an 'Algorithm'?", "options": ["A musical instrument", "Step-by-step instructions", "A robot arm", "A digital photo"], "answer": 1},
+        {"q": "Who is known as the 'Father of Artificial Intelligence'?", "options": ["Elon Musk", "John McCarthy", "Bill Gates", "Charles Babbage"], "answer": 1},
+        {"q": "Which test determines if a machine can think like a human?", "options": ["Blood Test", "Turing Test", "IQ Test", "Speed Test"], "answer": 1},
+        {"q": "What is 'Natural Language Processing' (NLP)?", "options": ["Plants talking", "AI understanding human speech", "A fast internet speed", "A coding language for robots"], "answer": 1},
+        {"q": "What is 'Computer Vision'?", "options": ["Wearing glasses while coding", "AI interpreting visual data (images)", "A screen protector", "Blind robots"], "answer": 1}
+      ]
+    },
+    {
+      "sectionTitle": "Section 2: AI in Everyday Life",
+      "questions": [
+        {"q": "How do Netflix/YouTube suggest videos?", "options": ["Human watching you", "Random picks", "Recommendation algorithm", "Asking parents"], "answer": 2},
+        {"q": "In a self-driving car, what acts as the 'eyes'?", "options": ["Steering wheel", "Sensors and cameras", "Headlights", "Rearview mirror"], "answer": 1},
+        {"q": "FaceID on an iPhone uses AI to:", "options": ["Take a selfie", "Compare face to a math model", "Brighten screen", "Call friends"], "answer": 1},
+        {"q": "When email goes to 'Spam', what happened?", "options": ["Sender deleted it", "AI filtered patterns", "Computer is broken", "Slow internet"], "answer": 1},
+        {"q": "Virtual Assistants like Alexa and Siri use:", "options": ["Telepathy", "Voice recognition AI", "Recordings of everyone", "Remote controls"], "answer": 1},
+        {"q": "How does Google Maps predict traffic?", "options": ["Checking local news", "Analyzing location data from users", "Guessing", "Using traffic lights"], "answer": 1},
+        {"q": "Chatbots on websites are used to:", "options": ["Play games", "Provide automated support", "Hack computers", "Sell keyboards"], "answer": 1},
+        {"q": "Smart thermostats like Nest learn your:", "options": ["Daily schedule", "Email password", "Favorite color", "Bank details"], "answer": 0}
+      ]
+    },
+    {
+      "sectionTitle": "Section 3: Generative AI & The Future",
+      "questions": [
+        {"q": "What is 'Generative AI'?", "options": ["Generating electricity", "Creating new content (text/images)", "Math only AI", "Old computer version"], "answer": 1},
+        {"q": "What is a 'Smart City'?", "options": ["Genius residents", "AI managing traffic/waste", "No robots", "Lego city"], "answer": 1},
+        {"q": "The term 'Human-AI Collaboration' means:", "options": ["Working together", "Fighting robots", "Becoming robots", "Buying AI"], "answer": 0},
+        {"q": "What is a 'Prompt' in Generative AI?", "options": ["A virus", "Instruction given to the AI", "The AI's name", "A computer screen"], "answer": 1},
+        {"q": "Which of these is a Generative AI tool?", "options": ["Excel", "ChatGPT", "Notepad", "Calculator"], "answer": 1},
+        {"q": "In the future, AI might help doctors by:", "options": ["Doing surgery alone", "Analyzing X-rays for diseases", "Cleaning the hospital", "Taking over the front desk"], "answer": 1},
+        {"q": "What is 'Narrow AI'?", "options": ["AI that does one specific task", "AI that can do everything", "AI with a small screen", "Fast AI"], "answer": 0},
+        {"q": "Artificial General Intelligence (AGI) refers to:", "options": ["AI that is better than humans at everything", "AI used only in cars", "General Electric company", "Basic coding"], "answer": 0}
+      ]
+    },
+    {
+      "sectionTitle": "Section 4: Logic & Technical Challenges",
+      "questions": [
+        {"q": "What are 'Neural Networks' inspired by?", "options": ["Spider webs", "The human brain", "Road maps", "Internet cables"], "answer": 1},
+        {"q": "In AI, what is 'Training'?", "options": ["Running on a treadmill", "Feeding data to improve accuracy", "Buying new hardware", "Deleting old files"], "answer": 1},
+        {"q": "What is 'Big Data'?", "options": ["A very large computer", "Massive datasets used for AI training", "A tech company name", "Infinite storage"], "answer": 1},
+        {"q": "Which field uses AI to detect credit card fraud?", "options": ["Agriculture", "Finance", "Music", "Cooking"], "answer": 1},
+        {"q": "What is 'Reinforcement Learning'?", "options": ["Learning by trial and error/reward", "Reading books", "Downloading updates", "Being forced to code"], "answer": 0},
+        {"q": "In a 'Decision Tree', what do the branches represent?", "options": ["Leaves", "Possible outcomes/choices", "Errors", "Data loss"], "answer": 1},
+        {"q": "What is 'Supervised Learning'?", "options": ["Learning with labeled examples", "Learning without help", "A teacher watching a robot", "AI watching TV"], "answer": 0},
+        {"q": "What is the primary language used in AI development today?", "options": ["HTML", "Java", "Python", "C++"], "answer": 2}
+      ]
+    },
+    {
+      "sectionTitle": "Section 5: Ethics, Safety & Logic",
+      "questions": [
+        {"q": "What is 'Algorithmic Bias'?", "options": ["AI is too fast", "Unfair results from training data", "AI turning off", "Computer virus"], "answer": 1},
+        {"q": "What are 'Deepfakes'?", "options": ["HD movies", "AI-generated fake actions/speech", "Study aids", "Camera cleaner"], "answer": 1},
+        {"q": "If an AI creates a painting, who owns it?", "options": ["The AI", "The computer", "Debated legal question", "Nobody"], "answer": 2},
+        {"q": "What is an 'AI Hallucination'?", "options": ["AI sleeping", "AI giving confident but false info", "A colorful screen", "Robot dreaming"], "answer": 1},
+        {"q": "Why is 'Privacy' a concern with AI?", "options": ["AI uses personal data for training", "AI is expensive", "AI breaks easily", "AI can't read"], "answer": 0},
+        {"q": "The concept of 'Explainable AI' (XAI) is to:", "options": ["Make AI talk more", "Understand why AI made a decision", "Teach AI English", "Translate code"], "answer": 1},
+        {"q": "What is the 'Black Box' problem in AI?", "options": ["A physical black computer", "Not knowing how AI reaches a result", "A deleted file", "Storage space"], "answer": 1},
+        {"q": "Which of these is a danger of AI automation?", "options": ["Faster work", "Job displacement", "Better quality", "More free time"], "answer": 1},
+        {"q": "What is the 'Social Credit' system concern?", "options": ["Better banking", "AI monitoring and scoring behavior", "Free internet", "Social media likes"], "answer": 1},
+        {"q": "What is the best way to prevent AI bias?", "options": ["Use only one source of data", "Use diverse and inclusive datasets", "Stop using AI", "Use older computers"], "answer": 1}
+      ]
+    }
+  ]
+}
